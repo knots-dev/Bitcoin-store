@@ -4,10 +4,16 @@ category: bitcoin
 name: Bitcoin Knots
 implements:
   - bitcoin
-version: "1.2.20"
-tagline: Run your personal node powered by Bitcoin Knots
+version: "1.2.20-knotsdev.rc5"
+tagline: Bitcoin Knots with the 29.4.3rc5 community test build
 icon: https://raw.githubusercontent.com/getumbrel/umbrel-apps-gallery/refs/heads/master/bitcoin-knots/icon.svg
 description: >-
+  This is the knots-dev copy of Leo Haf's Bitcoin Knots app. It adds Bitcoin Knots 29.4.3rc5, a community test build that is not an official Bitcoin Knots release, and runs it by default. Run it on test nodes only. Release, signatures and Guix attestations: https://github.com/knots-dev/bitcoin/releases/tag/v29.4.3.knots20260508rc5
+
+
+  Your chain data and settings stay as they are. Every Knots version from Leo Haf's app is still on the Version tab. To go back, leave the version on "Always use the latest version", remove this store, add https://github.com/Horizon-btc/Bitcoin-store again and update the app.
+
+
   Take control of your digital sovereignty by choosing Bitcoin Knots to run your node! By using Knots, you’re supporting a version of Bitcoin that prioritizes efficiency, security, and flexibility. With Bitcoin Knots’ enhanced configuration options, you can fine-tune your node to help keep the network clean and resilient, actively reducing unnecessary load from spam or parasitic transactions.
 
 
@@ -27,8 +33,8 @@ description: >-
 developer: Horizon BTC
 website: https://bitcoinknots.org
 dependencies: []
-repo: https://github.com/bitcoinknots/bitcoin.git
-support: https://github.com/bitcoinknots/bitcoin/issues
+repo: https://github.com/knots-dev/umbrel-bitcoin
+support: https://github.com/knots-dev/umbrel-bitcoin/issues
 port: 2113
 gallery:
   - https://raw.githubusercontent.com/getumbrel/umbrel-apps-gallery/refs/heads/master/bitcoin-knots/1.jpg
@@ -37,7 +43,7 @@ gallery:
 path: ""
 defaultPassword: ""
 releaseNotes: >-
-  Fix default policy for rejecttokens
+  Adds Bitcoin Knots 29.4.3rc5, the community test build from knots-dev, and makes it the default. The image ships the Guix-built binary from the knots-dev release, checked at build time against SHA256SUMS signed by A47D 99B6 DB0D 715D 40C5 9A20 23AE 8A8E A7E2 4E38.
 widgets:
   - id: "stats"
     type: "four-stats"

@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# Runs as root from the installed app before an update copies in the new app's files. An app from
+# another store does not ship the knots-dev build, and a settings.json pinned to it would fail
+# validation there, so bitcoind would never start. Unpin it so the next app runs its latest version.
+# The edit runs as uid 1000, which owns the file, so root never writes through a path that user controls.
+
+DATA_ROOT="${APP_DATA_ROOT:-$(dirname "${BASH_SOURCE[0]}")/../data}"
+SETTINGS_JSON="${DATA_ROOT}/app/settings.json"
+
+[[ -f "${SETTINGS_JSON}" ]] || exit 0
+
+setpriv --reuid=1000 --regid=1000 --clear-groups -- bash -c '
+	settings="$1"
+	[[ "$(jq -r ".version" "${settings}")" == "v29.4.3.knots20260508rc5" ]] || exit 0
+	tmp="$(mktemp "${settings}.XXXXXX")" || exit 1
+	if jq ".version = \"latest\"" "${settings}" > "${tmp}" && chmod --reference="${settings}" "${tmp}" && mv -f "${tmp}" "${settings}"; then
+		echo "App: btc-bitcoinknots - Unpinned v29.4.3.knots20260508rc5"
+	else
+		rm -f "${tmp}"
+	fi
+' bash "${SETTINGS_JSON}"
