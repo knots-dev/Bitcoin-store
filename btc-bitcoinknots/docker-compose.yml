@@ -7,7 +7,7 @@ services:
       APP_PORT: 3000
   
   app:
-    image: ghcr.io/horizon-btc/umbrel-bitcoin-knots:1.2.20@sha256:f75bc07728667773396e029ff88ddb30227693df225f1d4dac4c0646a7112c73
+    image: ghcr.io/knots-dev/umbrel-bitcoin:1.2.20-knotsdev.rc5@sha256:e23b0b0c63b93fa699ef33df1063d24db8d20a5a67564c196992f290277f50fc
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 15m30s
